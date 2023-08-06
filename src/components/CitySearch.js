@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const CitySearch = ({ allLocations }) => {
+const CitySearch = ({ allLocations, setCurrentCity }) => {
 	const [showSuggestions, setShowSuggestions] = useState(false);
 	const [query, setQuery] = useState('');
 	const [suggestions, setSuggestions] = useState([]);
+
+	// use the stringified value of the allLocation prop as a dependency.
+	// This way, if there’s a change in it (e.g.,
+	// an empty array that gets filled), the useEffect code will be
+	// re-executed again, ensuring that the local suggestions state is updated.
+	useEffect(() => {
+		setSuggestions(allLocations);
+	}, [`${allLocations}`]);
 
 	const handleInputChanged = (event) => {
 		const value = event.target.value;
@@ -21,6 +29,7 @@ const CitySearch = ({ allLocations }) => {
 		const value = event.target.textContent;
 		setQuery(value);
 		setShowSuggestions(false); // to hide the list
+		setCurrentCity(value);
 	};
 
 	return (
