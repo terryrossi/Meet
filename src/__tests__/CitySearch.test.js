@@ -7,14 +7,17 @@ import { extractLocations, getEvents } from '../api';
 describe('<CitySearch /> component', () => {
 	let CitySearchComponent;
 	let cityTextBox;
+
 	beforeEach(() => {
 		CitySearchComponent = render(<CitySearch allLocations={[]} />);
 		cityTextBox = CitySearchComponent.queryByRole('textbox');
 	});
+
 	test('I.2.c.i: renders text input', () => {
 		expect(cityTextBox).toBeInTheDocument();
 		expect(cityTextBox).toHaveClass('city');
 	});
+
 	test('I.2.c.ii: suggestions list is hidden by default', () => {
 		const suggestionList = CitySearchComponent.queryByRole('list');
 		expect(suggestionList).not.toBeInTheDocument();
@@ -22,15 +25,20 @@ describe('<CitySearch /> component', () => {
 
 	test('I.2.c.iii: renders a list of suggestions when city textbox gains focus', async () => {
 		const user = userEvent.setup();
+
 		await user.click(cityTextBox);
+
 		const suggestionList = CitySearchComponent.queryByRole('list');
 		expect(suggestionList).toBeInTheDocument();
 		expect(suggestionList).toHaveClass('suggestions');
 	});
+
 	test('I.2.c.iv: updates list of suggestions correctly when user types in city textbox', async () => {
 		const user = userEvent.setup();
+
 		const allEvents = await getEvents();
 		const allLocations = extractLocations(allEvents);
+
 		CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
 
 		// user types "Berlin" in city textbox
@@ -46,7 +54,9 @@ describe('<CitySearch /> component', () => {
 
 		// get all <li> elements inside the suggestion list
 		const suggestionListItems = CitySearchComponent.queryAllByRole('listitem');
+
 		expect(suggestionListItems).toHaveLength(suggestions.length + 1);
+
 		for (let i = 0; i < suggestions.length; i += 1) {
 			expect(suggestionListItems[i].textContent).toBe(suggestions[i]);
 		}
@@ -55,6 +65,7 @@ describe('<CitySearch /> component', () => {
 		const user = userEvent.setup();
 		const allEvents = await getEvents();
 		const allLocations = extractLocations(allEvents);
+
 		CitySearchComponent.rerender(
 			<CitySearch
 				allLocations={allLocations}
@@ -86,17 +97,23 @@ describe('<CitySearch /> component', () => {
 describe('<CitySearch /> integration', () => {
 	test('I.3.c.ii: renders suggestions list when the app is rendered.', async () => {
 		const user = userEvent.setup();
+
+		// Init DOM Elements
 		const AppComponent = render(<App />);
 		const AppDOM = AppComponent.container.firstChild;
 
 		const CitySearchDOM = AppDOM.querySelector('#city-search');
 		const cityTextBox = within(CitySearchDOM).queryByRole('textbox');
+
+		// User clicks on textbox
 		await user.click(cityTextBox);
 
 		const allEvents = await getEvents();
 		const allLocations = extractLocations(allEvents);
 
 		const suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem');
+
+		// List os suggestions should match list of locations + "See all cities"
 		expect(suggestionListItems.length).toBe(allLocations.length + 1);
 	});
 });

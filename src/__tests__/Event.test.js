@@ -17,9 +17,11 @@ describe('<Event /> component', () => {
 		// console.log(event);
 		expect(EventComponent.queryByText(event.summary)).toBeInTheDocument();
 	});
+
 	test('II.1.c.ii: has an text element of type "location"', () => {
 		expect(EventComponent.queryByText(event.location)).toBeInTheDocument();
 	});
+
 	test('II.1.c.iii: has a button element labeled “Show Details”', () => {
 		// const allEvents = await getEvents();
 		expect(EventComponent.queryByText('Show Details')).toBeInTheDocument();
@@ -29,6 +31,7 @@ describe('<Event /> component', () => {
 		const detailsButton = EventComponent.queryByText('Show Details');
 		expect(detailsButton).toBeInTheDocument();
 	});
+
 	test("II.2.c.i: check that when user clicks the 'show details' button, event's details section should be shown", async () => {
 		const user = userEvent.setup();
 
@@ -38,7 +41,8 @@ describe('<Event /> component', () => {
 		const hideDetailsButton = EventComponent.queryByText('Hide Details');
 		expect(hideDetailsButton).toBeInTheDocument();
 	});
-	test("II.2.c.ii: check that when user clicks the 'hide details' button, event's details section should be hidden", async () => {
+
+	test("II.3.c.i: check that when user clicks the 'hide details' button, event's details section should be hidden", async () => {
 		const user = userEvent.setup();
 
 		const hideDetailsButton = EventComponent.queryByText('Hide Details');

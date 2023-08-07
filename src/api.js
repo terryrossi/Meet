@@ -39,6 +39,7 @@ const checkToken = async (accessToken) => {
 	const result = await response.json();
 	return result;
 };
+
 // Clean up the URL from any additional paramaters
 const removeQuery = () => {
 	let newurl;
@@ -63,7 +64,8 @@ export const getEvents = async () => {
 
 	if (token) {
 		removeQuery();
-		const url = 'YOUR_GET_EVENTS_API_ENDPOINT' + '/' + token;
+		const url =
+			'https://s2jbqzbkx1.execute-api.us-west-1.amazonaws.com/dev/api/get-events' + '/' + token;
 		const response = await fetch(url);
 		const result = await response.json();
 		if (result) {
@@ -75,6 +77,8 @@ export const getEvents = async () => {
 // Authentication
 export const getAccessToken = async () => {
 	const accessToken = localStorage.getItem('access_token');
+	// const accessToken = '';
+
 	const tokenCheck = accessToken && (await checkToken(accessToken));
 
 	if (!accessToken || tokenCheck.error) {
