@@ -33,6 +33,10 @@ function App() {
 
 	return (
 		<div className='App'>
+			<h1 className='google-logo'>
+				Google <span> Calendar </span> Events
+			</h1>
+			<hr></hr>
 			<CitySearch
 				allLocations={allLocations}
 				setCurrentCity={setCurrentCity}

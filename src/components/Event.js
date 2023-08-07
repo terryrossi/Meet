@@ -11,7 +11,13 @@ const Event = ({ event }) => {
 	return (
 		<>
 			<li key={event.id}>
-				<Card>
+				<Card
+					style={{
+						boxShadow: '1px 1px 10px 0px rgb(41, 39, 39)',
+						borderRadius: '9px',
+						padding: '15px',
+						margin: '10px',
+					}}>
 					<Card.Body>
 						<Card.Title>{event.summary}</Card.Title>
 						<Card.Text>{event.location}</Card.Text>
