@@ -8,6 +8,7 @@ describe('<CitySearch /> component', () => {
 	let CitySearchComponent;
 	let cityTextBox;
 
+	// Scenario 2: User should see a list of suggestions when they search for a city.
 	beforeEach(() => {
 		CitySearchComponent = render(<CitySearch allLocations={[]} />);
 		cityTextBox = CitySearchComponent.queryByRole('textbox');
@@ -61,6 +62,8 @@ describe('<CitySearch /> component', () => {
 			expect(suggestionListItems[i].textContent).toBe(suggestions[i]);
 		}
 	});
+
+	// Scenario 3: User can select a city from the suggested list.
 	test('I.3.c.i: renders the suggestion text in the textbox upon clicking on the suggestion', async () => {
 		const user = userEvent.setup();
 		const allEvents = await getEvents();
@@ -94,6 +97,7 @@ describe('<CitySearch /> component', () => {
 // (the expected number should be the count of all suggested locations,
 // plus one for the hardcoded “See all cities” suggested item).
 
+// Scenario 3: User can select a city from the suggested list.
 describe('<CitySearch /> integration', () => {
 	test('I.3.c.ii: renders suggestions list when the app is rendered.', async () => {
 		const user = userEvent.setup();

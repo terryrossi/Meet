@@ -12,6 +12,7 @@ const EventList = ({ events }) => {
 						// 	sm={6}
 						// 	xs={12}>
 						<Event
+							className='event'
 							key={event.id}
 							event={event}
 						/>
