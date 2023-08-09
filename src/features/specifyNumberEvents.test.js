@@ -11,58 +11,66 @@ defineFeature(feature, (test) => {
 		when,
 		then,
 	}) => {
-		// Init Variables
+		// Nothing to de here
+		given(/^a default of (\d+) in the input field for the number of events$/, async (arg0) => {});
+
 		let AppComponent;
-		let AppDOM;
-		let EventListDOM;
-		let NumberOfEventsDOM;
-		let NumberOfEventsTextBox;
-		let EventListItems;
-
-		given(/^a default of (\d+) in the input field for the number of events$/, async (arg0) => {
-			// DOM Elements init
+		when('user does not modify this number', () => {
+			// Initial rendering
 			AppComponent = render(<App />);
-			AppDOM = AppComponent.container.firstChild;
-
-			NumberOfEventsDOM = AppDOM.querySelector('#number-of-events');
-			NumberOfEventsTextBox = within(NumberOfEventsDOM).queryByRole('textbox');
-
-			EventListDOM = AppDOM.querySelector('#event-list');
-
-			console.log('eventsListDom ; ', EventListDOM);
-
-			await waitFor(() => {
-				// EventListItems = within(EventListDOM).queryAllByRole('listitem');
-				EventListItems = within(EventListDOM).queryAllByRole('listitem');
-			});
-			console.log('List length : ', EventListItems.length);
 		});
 
-		// Nothing needs to be done here
-		when('user does not modify this number', () => {});
-
 		// Check if the number of Events listed is 32
-		then(/^the list of events is filtered to (\d+) maximum events$/, (arg0) => {
-			// First make sure the default value is 32
-			expect(NumberOfEventsTextBox).toHaveValue('32');
+		then(/^the list of events is filtered to (\d+) maximum events$/, async (arg0) => {
+			//
+			const AppDOM = AppComponent.container.firstChild;
+			const EventListDOM = AppDOM.querySelector('#event-list');
 
-			// Now Create a liste of items that should be equal to 32
-			expect(EventListItems.length).toBe(32);
+			await waitFor(() => {
+				// Create a list of items which should be 32 (default)
+				const EventListItems = within(EventListDOM).queryAllByRole('listitem');
+				expect(EventListItems.length).toBe(32);
+			});
 		});
 	});
 
 	test('User can change the number of events displayed.', ({ given, when, then }) => {
-		// let AppComponent;
-		// let AppDOM;
-		// let NumberOfEventsDOM;
-		// let NOETextBox;
-		given(/^a default of (\d+) in the input field for the number of events$/, (arg0) => {});
+		given(/^a default of (\d+) in the input field for the number of events$/, async (arg0) => {});
 
-		when('the user modifies this number', () => {});
+		// Init all DOM Elements
+		let AppComponent;
+		let AppDOM;
+		let NumberOfEventsDOM;
+		let NOETextBox;
+
+		when('the user modifies this number', async () => {
+			const user = userEvent.setup();
+			// Initial rendering
+			AppComponent = render(<App />);
+			AppDOM = AppComponent.container.firstChild;
+
+			// DOM element for the textbox parent
+			NumberOfEventsDOM = AppDOM.querySelector('#number-of-events');
+
+			// textbox element
+			NOETextBox = within(NumberOfEventsDOM).queryByRole('textbox');
+
+			//  erase number 32 to replace with 10
+			await user.type(NOETextBox, '{backspace}{backspace}10');
+		});
 
 		then(
 			'the list of events is filtered to a new number of events based on the entered number',
-			() => {}
+			async () => {
+				// NO RERENDERING
+				AppDOM = AppComponent.container.firstChild;
+				const EventListDOM = AppDOM.querySelector('#event-list');
+				await waitFor(() => {
+					// New list should be equal to 10
+					const EventListItems = within(EventListDOM).queryAllByRole('listitem');
+					expect(EventListItems.length).toBe(10);
+				});
+			}
 		);
 	});
 });
