@@ -4,6 +4,8 @@ import CitySearch from './components/CitySearch';
 import EventList from './components/EventList';
 import NumberOfEvents from './components/NumberOfEvents';
 import { getEvents, extractLocations } from './api';
+import { InfoAlert } from './components/alert';
+import { ErrorAlert } from './components/alert';
 
 function App() {
 	// State Variables
@@ -11,6 +13,8 @@ function App() {
 	const [currentNOE, setCurrentNOE] = useState(32); // initialized at 32 based on requirements
 	const [allLocations, setAllLocations] = useState([]);
 	const [currentCity, setCurrentCity] = useState('See all cities');
+	const [infoAlert, setInfoAlert] = useState('');
+	const [errorAlert, setErrorAlert] = useState('');
 
 	// Fetch Google API for Calendar Events
 	useEffect(() => {
@@ -36,12 +40,19 @@ function App() {
 			<h1 className='google-logo'>
 				Google <span> Calendar </span> Events
 			</h1>
-			<hr></hr>
+			<div className='alerts-container'>
+				{errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
+			</div>
+			<div>{infoAlert.length ? <InfoAlert text={infoAlert} /> : <hr></hr>}</div>
 			<CitySearch
 				allLocations={allLocations}
 				setCurrentCity={setCurrentCity}
+				setInfoAlert={setInfoAlert}
 			/>
-			<NumberOfEvents setCurrentNOE={setCurrentNOE} />
+			<NumberOfEvents
+				setCurrentNOE={setCurrentNOE}
+				setErrorAlert={setErrorAlert}
+			/>
 			<EventList events={events} />
 		</div>
 	);

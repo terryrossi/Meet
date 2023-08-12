@@ -10,7 +10,13 @@ describe('<CitySearch /> component', () => {
 
 	// Scenario 2: User should see a list of suggestions when they search for a city.
 	beforeEach(() => {
-		CitySearchComponent = render(<CitySearch allLocations={[]} />);
+		CitySearchComponent = render(
+			<CitySearch
+				allLocations={[]}
+				setCurrentCity={() => {}}
+				setInfoAlert={() => {}}
+			/>
+		);
 		cityTextBox = CitySearchComponent.queryByRole('textbox');
 	});
 
@@ -40,7 +46,13 @@ describe('<CitySearch /> component', () => {
 		const allEvents = await getEvents();
 		const allLocations = extractLocations(allEvents);
 
-		CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+		CitySearchComponent.rerender(
+			<CitySearch
+				allLocations={allLocations}
+				setCurrentCity={() => {}}
+				setInfoAlert={() => {}}
+			/>
+		);
 
 		// user types "Berlin" in city textbox
 		// const cityTextBox = CitySearchComponent.queryByRole('textbox');
@@ -73,6 +85,7 @@ describe('<CitySearch /> component', () => {
 			<CitySearch
 				allLocations={allLocations}
 				setCurrentCity={() => {}}
+				setInfoAlert={() => {}}
 			/>
 		);
 

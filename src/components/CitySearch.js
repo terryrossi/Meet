@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const CitySearch = ({ allLocations, setCurrentCity }) => {
+const CitySearch = ({ allLocations, setCurrentCity, setInfoAlert }) => {
 	// State Variables
 	const [showSuggestions, setShowSuggestions] = useState(false);
 	const [query, setQuery] = useState('');
@@ -29,6 +29,15 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
 
 		// suggestions are now a filtered list of cities based on user input
 		setSuggestions(filteredLocations);
+
+		// Prepare error message in case no city found with user input value
+		let infoText;
+		if (filteredLocations.length === 0) {
+			infoText = `No cities found with : ${value}. Please try again`;
+		} else {
+			infoText = '';
+		}
+		setInfoAlert(infoText);
 	};
 
 	// Sets the value of query to the city clicked on from the textbox
@@ -37,6 +46,7 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
 		setQuery(value);
 		setShowSuggestions(false); // to hide the list
 		setCurrentCity(value);
+		setInfoAlert('');
 	};
 
 	return (

@@ -14,7 +14,12 @@ describe('<NumberOfEvents /> component', () => {
 		// This function is used to avoid a problem running the unit test when rendering NumberOfEvents without the proper State variable
 		// That state variable is not available here so a dummy function will be used.
 		setCurrentNOE = jest.fn();
-		numberOfEventsComponent = render(<NumberOfEvents setCurrentNOE={setCurrentNOE} />);
+		numberOfEventsComponent = render(
+			<NumberOfEvents
+				setCurrentNOE={setCurrentNOE}
+				setErrorAlert={() => {}}
+			/>
+		);
 
 		// Init DOM Element
 		numberTextBox = numberOfEventsComponent.queryByRole('textbox');
