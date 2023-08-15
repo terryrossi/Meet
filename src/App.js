@@ -80,7 +80,7 @@ function App() {
 						role='status'
 						aria-hidden='true'
 					/>
-					Loading...
+					<span> Loading...</span>
 				</Button>
 			) : (
 				<EventList events={events} />
