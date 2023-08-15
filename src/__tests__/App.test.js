@@ -1,6 +1,6 @@
 // src/__tests__/App.test.js
 
-import { render, within } from '@testing-library/react';
+import { render, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getEvents } from '../api';
 import App from '../App';
@@ -15,8 +15,10 @@ describe('<App /> component', () => {
 		AppDOM = render(<App />).container.firstChild;
 	});
 
-	test('I.1.c.i: renders list of events', () => {
-		expect(AppDOM.querySelector('#event-list')).toBeInTheDocument();
+	test('I.1.c.i: renders list of events', async () => {
+		await waitFor(() => {
+			expect(AppDOM.querySelector('#event-list')).toBeInTheDocument();
+		});
 	});
 
 	test('I.1.c.ii: renders CitySearch', () => {

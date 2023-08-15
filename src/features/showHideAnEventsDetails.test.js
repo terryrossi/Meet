@@ -14,7 +14,6 @@ defineFeature(feature, (test) => {
 			// Rendering the App
 			AppComponent = render(<App />);
 			AppDOM = AppComponent.container.firstChild;
-			EventListDOM = AppDOM.querySelector('#event-list');
 		});
 
 		// Nothing needs to be done here
@@ -24,6 +23,7 @@ defineFeature(feature, (test) => {
 		// The Button should not be present if none of the Show Details cards are opened
 		then('all the events should show in collapsed mode', async () => {
 			await waitFor(() => {
+				EventListDOM = AppDOM.querySelector('#event-list');
 				const hideDetailsButton = within(EventListDOM).queryByText('Hide Details');
 				expect(hideDetailsButton).not.toBeInTheDocument();
 			});
@@ -40,11 +40,11 @@ defineFeature(feature, (test) => {
 			// Render the App and create the variables for Dom Elements
 			AppComponent = render(<App />);
 			AppDOM = AppComponent.container.firstChild;
-			EventListDOM = AppDOM.querySelector('#event-list');
 
 			// Wait for events to be listed and create a list of Show Details button elements
 			// Check to see if there is at least 1 button present
 			await waitFor(() => {
+				EventListDOM = AppDOM.querySelector('#event-list');
 				showDetailsButtonList = within(EventListDOM).queryAllByText('Show Details');
 				expect(showDetailsButtonList[0]).toBeInTheDocument();
 			});
@@ -84,10 +84,11 @@ defineFeature(feature, (test) => {
 
 			// Create Dom element variables
 			AppDOM = AppComponent.container.firstChild;
-			EventListDOM = AppDOM.querySelector('#event-list');
+			// EventListDOM = AppDOM.querySelector('#event-list');
 
 			// Build a list of "Show Details" Buttons (Wait for getEvents to fetch events)
 			await waitFor(() => {
+				EventListDOM = AppDOM.querySelector('#event-list');
 				showDetailsButtonList = within(EventListDOM).queryAllByText('Show Details');
 				expect(showDetailsButtonList[0]).toBeInTheDocument();
 			});

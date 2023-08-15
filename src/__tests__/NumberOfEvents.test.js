@@ -73,11 +73,11 @@ describe('<NumberOfEvents /> integration', () => {
 
 	test('III.2.c.ii: Check if the number of events shown match the max number entered by the user', async () => {
 		const user = userEvent.setup();
-		const EventListDOM = AppDOM.querySelector('#event-list');
 
 		await user.type(NOETextBox, '{backspace}{backspace}3');
 
 		await waitFor(() => {
+			const EventListDOM = AppDOM.querySelector('#event-list');
 			const EventListItems = within(EventListDOM).queryAllByRole('listitem');
 			expect(EventListItems.length).toBe(3);
 		});

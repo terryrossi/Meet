@@ -22,8 +22,9 @@ defineFeature(feature, (test) => {
 		// Unit Test: I.1.c.vi: renders a list of 32 events when the app is mounted and rendered
 		then('the user should see the list of all upcoming events.', async () => {
 			const AppDOM = AppComponent.container.firstChild;
-			const EventListDOM = AppDOM.querySelector('#event-list');
+
 			await waitFor(() => {
+				const EventListDOM = AppDOM.querySelector('#event-list');
 				const EventListItems = within(EventListDOM).queryAllByRole('listitem');
 				expect(EventListItems.length).toBe(32);
 			});

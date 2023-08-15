@@ -93,6 +93,17 @@ p {
 	z-index: 1000; */
 }
 
+.charts-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px; /* Add gap between columns */
+}
+@media (max-width: 768px) {
+	.charts-container {
+		grid-template-columns: 1fr;
+	}
+}
+
 input[type='text'],
 input[type='number'] {
 	padding: 8px 6px 8px 10px;

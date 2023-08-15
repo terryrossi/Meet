@@ -24,10 +24,10 @@ defineFeature(feature, (test) => {
 		then(/^the list of events is filtered to (\d+) maximum events$/, async (arg0) => {
 			//
 			const AppDOM = AppComponent.container.firstChild;
-			const EventListDOM = AppDOM.querySelector('#event-list');
 
 			await waitFor(() => {
 				// Create a list of items which should be 32 (default)
+				const EventListDOM = AppDOM.querySelector('#event-list');
 				const EventListItems = within(EventListDOM).queryAllByRole('listitem');
 				expect(EventListItems.length).toBe(32);
 			});
@@ -64,9 +64,10 @@ defineFeature(feature, (test) => {
 			async () => {
 				// NO RERENDERING
 				AppDOM = AppComponent.container.firstChild;
-				const EventListDOM = AppDOM.querySelector('#event-list');
+
 				await waitFor(() => {
 					// New list should be equal to 10
+					const EventListDOM = AppDOM.querySelector('#event-list');
 					const EventListItems = within(EventListDOM).queryAllByRole('listitem');
 					expect(EventListItems.length).toBe(10);
 				});
