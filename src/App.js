@@ -7,6 +7,7 @@ import './App.css';
 import CitySearch from './components/CitySearch';
 import EventList from './components/EventList';
 import NumberOfEvents from './components/NumberOfEvents';
+import CityEventsChart from './components/CityEventsChart';
 import { getEvents, extractLocations } from './api';
 import { InfoAlert, ErrorAlert, WarningAlert } from './components/alert';
 
@@ -83,7 +84,13 @@ function App() {
 					<span> Loading...</span>
 				</Button>
 			) : (
-				<EventList events={events} />
+				<>
+					<CityEventsChart
+						allLocations={allLocations}
+						events={events}
+					/>
+					<EventList events={events} />
+				</>
 			)}
 		</div>
 	);
