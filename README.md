@@ -159,3 +159,11 @@ _Scenario 1:_
 - Given the User is on any page of the App
 - When user clicks on Show Chart
 - Then the App will Display a Charts Visualizing the number of events upcoming for the selected city.
+
+## APM Testing:
+
+Integration of Atatus APM tool to monitor the Application. The following print screens prove a fairly solid application. With potentially 1 issue showing a long Time To First Byte (TTFB) and Cumulative Layout Shift (CLS) on page load. The reason being that I was using a Proxy server to try to simulate a connection from outside of the US. The test ended up NOT showing a foreign IP address which is surprising to me, but the loading of the page TTFB was impacted.
+I have additionally opened the app using an Iphone on IOS which can be seen below with decent performances.
+(See print screens below).
+
+![APM Dashboard](./Readme-docs/APM-1.png)
