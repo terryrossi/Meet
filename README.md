@@ -20,7 +20,7 @@ normal web application, but it will also reap the benefits of both serverless ar
 
 The serverless approach will be heavily implemented in the Authorization process to access the Google Calendar API. Several steps (documented below) will be needed to achieve this Process:
 
-![Detailed serverless Process](serverless-diagram.png)
+![Detailed serverless Process](./Readme-docs/serverless-diagram.png)
 
 ### example of serverless functions being used in a real-world product:
 
@@ -162,8 +162,66 @@ _Scenario 1:_
 
 ## APM Testing:
 
-Integration of Atatus APM tool to monitor the Application. The following print screens prove a fairly solid application. With potentially 1 issue showing a long Time To First Byte (TTFB) and Cumulative Layout Shift (CLS) on page load. The reason being that I was using a Proxy server to try to simulate a connection from outside of the US. The test ended up NOT showing a foreign IP address which is surprising to me, but the loading of the page TTFB was impacted.
+- Integration of Atatus APM tool to monitor the Application.
+
+The following print screens prove a fairly solid application. With potentially 1 issue showing a long Time To First Byte (TTFB) and Cumulative Layout Shift (CLS) on page load. The reason being that I was using a Proxy server to try to simulate a connection from outside of the US. The test ended up NOT showing a foreign IP address which is surprising to me, but the loading of the page TTFB was impacted.
+
 I have additionally opened the app using an Iphone on IOS which can be seen below with decent performances.
-(See print screens below).
 
 ![APM Dashboard](./Readme-docs/APM-1.png)
+![APM Dashboard](./Readme-docs/APM-2.png)
+![APM Dashboard](./Readme-docs/APM-3.png)
+![APM Dashboard](./Readme-docs/APM-4.png)
+![APM Dashboard](./Readme-docs/APM-5.png)
+![APM Dashboard](./Readme-docs/APM-6.png)
+![APM Dashboard](./Readme-docs/APM-7.png)
+
+## Continuous Integration and Continuous Delivery
+
+- Continuous integration (CI) is a software development practice in which developers regularly commit (or integrate) their code into a shared source control system. Each commit is then built and tested automatically so that problems can be detected as soon as possible.
+
+The Process is shown in the graph below:
+
+![APM Dashboard](./Readme-docs/CI-CD.png)
+
+- Continuous delivery (CD) is, essentially, an extension of continuous integration. As mentioned earlier, continuous integration involves automating the build and test phases of app development. Any build that passes the continuous integration phase is considered a “good candidate” for production release. Deployment to production is then done manually and involves a number of tasks such as uploading new files to the server and making them public. Continuous delivery takes things one step further, automating the deployment process so that “good candidates” can be released at the push of a button—the CD tool takes care of any deployment steps that would have been completed manually. The graph below shows the difference between CI and CD.
+
+![APM Dashboard](./Readme-docs/CI-CD-2.png)
+
+- Additionally, a good CD process implies the use of a staging environment that QA teams will use to manually test things not covered by automated tests. QA team can be alerted automatically as soon as a new version is ready to be tested and in case of any bugs found the developers can be alerted automatically to perform changes and fixes. The benefits of the staging area is to keep an environment for QA testing away from the reach of end users. Once the QA team validate a version, it can be deployed into production where users will have access to it.
+
+![APM Dashboard](./Readme-docs/CI-CD-3.png)
+
+_Note: I could be using CI and CD for my own Meet App project if I was working with several team members and if we had a separate QA team. The automatisation of the whole Process of implementing changes, commits, QA testing, Deployment would be tremendously improved and shortened._
+
+## Serverless Technology
+
+### How serverless technology is useful in the context of this app:
+
+Serverless Technology Will come to an advantage for this App for the following reasons:
+
+- No backend maintenance,
+- easy to scale,
+- always available,
+- no cost for idle time.
+
+The serverless approach will be heavily implemented in the Authorization process to access the Google Calendar API. Several steps (documented below) will be needed to achieve this Process:
+
+![APM Dashboard](./Readme-docs/serverless-diagram.png)
+
+## Progressive Web Application Enhancement:
+
+The Meet App has been enhanced as a PSW which will Bring the combined Advantages of Web Applications and Native Applications (including):
+
+- Downloadable on Desktops or Mobile devices
+- Responsive: PWAs look good on any screen size (desktop, mobile, tablet) and in any orientation (landscape, portrait).
+- Connectivity Independent: The application can run Offline
+- App-like interface
+- Faster loading time
+- Fresh: Will always show the latest version
+- Discoverable on search engines
+- Safe: Uses https
+- Re-engageable like a Mobile app: PWAs can be added to the home screen of a mobile device or to the Windows taskbar/MacOS Dock on desktop devices, just like native apps
+- Linkable like a Web App
+
+Additionally the App could also benefit from the location services or text-to-speech functionality of the mobile device it would run on.
