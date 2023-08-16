@@ -2,6 +2,7 @@
 .App {
 	text-align: center;
 	padding: 2% 5%;
+	background-color: #ebebeb;
 }
 
 .App * {
@@ -98,7 +99,7 @@ p {
 	grid-template-columns: 1fr 1fr;
 	gap: 20px; /* Add gap between columns */
 }
-@media (max-width: 768px) {
+@media (max-width: 870px) {
 	.charts-container {
 		grid-template-columns: 1fr;
 	}
